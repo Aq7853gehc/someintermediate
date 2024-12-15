@@ -1,71 +1,20 @@
-#![allow(unreachable_code, unused_labels)]
+// fn main() {
+//  panic!("Crash and terminate the porgram")   
+// }
 
-mod book;
-use book::{bar, baz, foo};
+// fn main() {
+//     let v: Vec<i32>= vec![1,2,4];
+//     v[88];
+//     println!("{}",v[99]);
+// }
 
-fn normal_loop() {
-    let mut count = 0u32;
+use std::fs::File;
 
-    println!("Let's count until infinity!");
-
-    // Infinite loop
-    loop {
-        count += 1;
-
-        if count == 3 {
-            println!("three");
-
-            // Skip the rest of this iteration
-            continue;
-        }
-
-        println!("{}", count);
-
-        if count == 5 {
-            println!("OK, that's enough");
-
-            break;
-        }
-    }
-}
-
-fn nested_loop() {
-    'outer: loop {
-        println!("Entered the outer loop");
-
-        'inner: loop {
-            println!("Entered the inner loop");
-
-            // This would break only the inner loop
-            //break;
-
-            // This breaks the outer loop
-            break 'outer;
-        }
-
-        println!("This point will never be reached");
-    }
-
-    println!("Exited the outer loop");
-}
-
-fn return_loop() {
-    let mut counter = 0;
-
-    let result = loop {
-        counter += 1;
-
-        if counter == 10 {
-            break counter * 2;
-        }
-    };
-
-    assert_eq!(result, 20);
-    println!("The result is {}", result);
-}
 
 fn main() {
-    foo();
-    bar();
-    baz();
+    let opne_file = File::open("hello.txt");
+    let _open_file_resutl = match opne_file {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {:?}", error),
+    };
 }
